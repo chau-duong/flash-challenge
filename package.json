@@ -1,0 +1,25 @@
+{
+  "name": "flash-challenge",
+  "version": "0.0.0",
+  "description": "Flash Media Node.js Challenge using Express 4",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "ejs": "^2.3.1",
+    "express": "~4.9.x"
+  },
+  "engines": {
+    "node": "0.12.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ]
+}

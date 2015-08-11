@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+
+</head>
+
+<body>
+
+  <% include ../partials/nav.ejs %>
+  <% 
+    var  json = profileJson['Profile'];
+  %>
+<div class="container">
+ <section class="team-profile">
+    <div class="row  ">
+        <div class="col-md-12">
+            <div class="headline text-center">
+              <h2 class="text-center">Meet The Team</h2>   
+            </div>      
+            <% var index=0;
+              var col_per_row= 4;
+              var len= json.length;
+              var run= Math.ceil(len/col_per_row);
+              var img='';
+              var prof_details=[];
+              
+              for(i=0; i<run; i++){
+
+                console.log('row: ' +i);
+                var start=i*col_per_row;
+                var finish= start +col_per_row  ;
+                %>
+                <div class="row mbottom10">
+
+                 <% for(var j=start; j<len && j<finish; j++){
+
+                      prof_details= json[j];
+                      img='/profiles/'+prof_details['profile_img'];
+                      console.log('------');%>
+                    
+                      <div class="col-md-3">
+                          <div class="content-box box-padded text-center">
+                              <img src="<%=img%>" class="mb20 m0auto img-circle img-responsive">
+                              <h3>
+                                
+                                  <br>
+                                  <small> <%=prof_details['position_title'];%></small>
+                                  <br>
+                                  <small> <a href="mailto:<%=prof_details['email']%>"><%=prof_details['email']%></a></small>
+                              </h3>
+                              <a href="#" class="btn-block btn-primary btn view-details" data-id=<%=prof_details['id']%> >View Details ></a>
+                          </div>
+                      </div>
+
+                    <%}%><!-- end inner loop -->  
+                </div> <!-- end row -->
+             <%}%><!-- end outer loop -->
+
+              
+        </div>
+    </div>    
+  </section> 
+  <!-- Profile Modal -->
+  <div class="modal fade" id="profileModal" tabindex="-1" role="dialog"
+      aria-labelledby="fileModalLabel" aria-hidden="true">
+      <div class="modal-dialog" >
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"
+                      aria-hidden="true">&times;</button>
+                  <h2 class="modal-title">Profile Details</h2>
+              </div>
+              <div class="modal-body" id="profile-body">
+                  <!-- Profile Details -->
+                  <div class="container-fluid">
+                      <div class"row">
+                          <div class="col-md-4">
+                            <img id='profile-img' src="<?=$img?>" class="img-responsive"> 
+                          </div>    
+                          <div class="col-md-6">
+                               <div class="content-box box-padded text-center">
+                                  <h3 id="profile-name"> Name</h3>
+                                  <h4>
+                                  <small id="profile-age">Age:</small>
+                                  <br>
+                                  <small id="profile-position">Position: </small>
+                                  <br>
+                                  <small id="profile-department">Department: </small>
+                                  <br>
+                                  <small> <a href="" id="profile-email"></a></small>
+                                  </h4>
+                              </div>    
+                          </div> 
+                      </div> 
+                  </div>     
+                  <!--  -->
+              </div>          
+          </div>
+          <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->       
+
+</div>
+
+<script>
+  var profile_data = <%- JSON.stringify(json) %>;
+</script>
+<script src="/js/test.js"></script>
+
+</body>
+</html>
